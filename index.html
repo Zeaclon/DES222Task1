@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+        "three/examples/jsm/controls/OrbitControls.js": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js"
+      }
+    }
+</script>
+<body>
+<div class="main-container">
+
+    <section id="banner" class="banner">
+        <h1 class="banner-title">Welcome to My Site</h1>
+        <p class="banner-subtitle">My success is my mission</p>
+    </section>
+
+    <section id="linkCard1" class="link-card">
+        <div id="dna3d-container" style="width: 100%; height: 300px;"></div>
+        <p class="link-card-blurb">DNA strand</p>
+    </section>
+
+    <section id="linkCard2" class="link-card">
+        <div id="nnc-container" style="width: 100%; height: 400px;"></div>
+        <p class="link-card-blurb">NNC</p>
+    </section>
+
+    <section id="linkCard3" class="link-card">
+        <p class="link-card-blurb">Essay</p>
+    </section>
+
+</div>
+
+<script type="module" src="js/DNAStrand.js"></script>
+<script type="module">
+    import { createNeuralNetwork } from './js/NNCBrain.js';
+
+    const container = document.getElementById('nnc-container');
+    createNeuralNetwork(container);
+</script></body>
+</html>

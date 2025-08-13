@@ -1,0 +1,145 @@
+/*
+Color pallete. This section defines variables for the color pallete,
+so that we can refer to particular colors by name instead of hexadecimal values.
+This is applied to the 'root' psuedo-element, which just means that these color
+variables are available to be used anywhere in our html document
+*/
+:root {
+    --white: #FFFFFF;
+    --black: #000000;
+    /* add in other color variables for color palette */
+    --dark-blue: #006D77;
+    --light-blue: #00B4D8;
+    --electric-purple: #9D4EDD;
+    --warm-grey: #F0F0F0;
+    --charcoal: #333333;
+    --orange: #FF8C42;
+}
+
+/* The body of the document has a white background and is set up as a vertical flexbox. */
+body {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Defines the main container size, we are limiting to 72em max */
+.main-container {
+    max-width: 72em;      /* max width (like you have now) */
+    width: 100%;          /* lets it shrink and grow */
+    font-family: 'Inter', system-ui, sans-serif;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "ban ban ban ban"
+        "lc1 lc1 lc1 lc1"
+        "lc2 lc2 lc2 lc2"
+        "lc3 lc3 lc3 lc3";
+    column-gap: 1em;
+    row-gap: 1.5em;
+    color: var(--warm-grey);  /* easier to see text */
+}
+
+/* Here we define the aspects of style of our elements other than their grid layout */
+.banner {
+    /* TODO: banner styling */
+    background-color: var(--dark-blue);
+    padding: 16px;
+    gap: 10px;
+}
+
+.banner-title {
+    /* TODO: banner main title font styling */
+    font-weight: 400;
+    font-size: 3em;
+}
+
+.banner-subtitle {
+    /* TODO: banner subtitle font styling */
+    font-size: 2.25em;
+    font-weight: 300;
+
+}
+
+.link-card {
+    /* TODO: style the card as a column based flexbox with rounded corners */
+    background-color: var(--light-blue);
+    border-radius: 1em;
+}
+
+/* this is the equivalent of setting the image rectangle to "Fill Container" in Figma */
+.link-card-image {
+    width: 100%;
+}
+
+.link-card-blurb {
+    /* TODO: style the blurb with padding */
+    font-size: 1em;
+    font-weight: lighter;
+}
+
+/* now we create names for the grid areas for specific elements */
+#banner {
+    /* TODO: give the grid-area a name */
+    grid-area: ban;
+}
+
+#linkCard1 {
+    /* TODO: give the grid-area a name */
+    grid-area: lc1;
+}
+
+#linkCard2 {
+    /* TODO: give the grid-area a name */
+    grid-area: lc2;
+}
+
+#linkCard3 {
+    /* TODO: give the grid-area a name */
+    grid-area: lc3;
+}
+
+.link-card {
+    width: 100%;  /* make sure it fills its grid cell */
+    min-width: 250px; /* optional, to avoid collapse */
+    min-height: 320px; /* to include blurb + 3d */
+    display: flex;
+    flex-direction: column;
+}
+
+#dna3d-container {
+    width: 100%;
+    height: 300px;  /* fixed height */
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+
+/*
+Responsive Layout breakpoints. We start 'mobile-first' i.e. we define how the layout should look
+for the smallest screen sizes. In this case we want a single column that spans the main container.
+Because this CSS definition comes first, it will apply by default. Then we override it below with
+media queries for progressively bigger screen widths
+*/
+
+@media (min-width: 50em) {
+    .main-container {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-areas:
+            "ban ban ban ban ban ban ban ban"
+            "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2"
+            ".   .   lc3 lc3 lc3 lc3 .   .";
+    }
+}
+
+@media (min-width: 75em) {
+    .main-container {
+        /* TODO: setup the grid-template for desktop layout */
+        /* Desktop-first layout */
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-areas:
+        "ban ban ban ban ban ban ban ban ban ban ban ban"
+        "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2 lc3 lc3 lc3 lc3";
+    }
+}
