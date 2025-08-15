@@ -15,10 +15,11 @@
         "txc txc txc txc"
         "lc1 lc1 lc1 lc1"
         "lc2 lc2 lc2 lc2"
-        "lc3 lc3 lc3 lc3";
+        "lc3 lc3 lc3 lc3"
+        "ftr ftr ftr ftr";
     column-gap: 1em;
     row-gap: 1em;
-    color: var(--warm-grey);  /* easier to see text */
+    color: var(--white);  /* easier to see text */
 }
 
 /* Tablet */
@@ -29,7 +30,8 @@
             "ban ban ban ban ban ban ban ban"
             "txc txc txc txc txc txc txc txc"
             "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2"
-            ".   .   lc3 lc3 lc3 lc3 .   .";
+            ".   .   lc3 lc3 lc3 lc3 .   .  "
+            "ftr ftr ftr ftr ftr ftr ftr ftr";
     }
 }
 
@@ -40,7 +42,8 @@
         grid-template-areas:
             "ban ban ban ban ban ban ban ban ban ban ban ban"
             "txc txc txc txc txc txc txc txc txc txc txc txc"
-            "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2 lc3 lc3 lc3 lc3";
+            "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2 lc3 lc3 lc3 lc3"
+            "ftr ftr ftr ftr ftr ftr ftr ftr ftr ftr ftr ftr";
     }
 }
 

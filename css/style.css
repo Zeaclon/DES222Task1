@@ -6,10 +6,6 @@
     --black: #000000;
     --dark-blue: #006D77;
     --light-blue: #00B4D8;
-    --electric-purple: #9D4EDD;
-    --warm-grey: #F0F0F0;
-    --charcoal: #333333;
-    --orange: #FF8C42;
 }
 
 /* Base typography & box sizing */
@@ -38,7 +34,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 1em;
     row-gap: 1em;
-    color: var(--warm-grey);
+    color: var(--white);
 }
 
 /* Banner */
@@ -58,6 +54,7 @@ body {
     font-weight: bolder;
     font-size: 2.5em;
     margin: 0.2em 0;
+    color: var(--white);
 }
 
 .banner-subtitle {
@@ -112,6 +109,33 @@ body {
 #linkCard1 { grid-area: lc1; }
 #linkCard2 { grid-area: lc2; }
 #linkCard3 { grid-area: lc3; }
+
+
+/* Footer Styling */
+.page-footer {
+    width: 100%;
+    text-align: center;
+    padding: 2em 1em;
+    background-color: var(--light-blue); /* dark background matching your palette */
+    color: var(--white);          /* highlight text color */
+    font-family: 'Orbitron', system-ui, sans-serif;
+    font-size: 1em;
+    margin-top: 3em;                   /* spacing above the footer */
+    grid-area: ftr;
+    border-radius: 2em;
+}
+
+.page-footer a {
+    color: var(--white);              /* link color */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.page-footer a:hover {
+    color: var(--dark-blue);     /* hover effect */
+}
+
 
 
 /* Mobile-first horizontal gradient for textCard */

@@ -39,7 +39,73 @@
     </section>
 
 </div>
-<script src="./js/main.js"></script>
-</body>
 
+<script type="module">
+    import { logInit, logClick, logPageChange } from './js/logger.js';
+
+    // Log page initialization
+    logInit();
+    logPageChange(window.location.pathname);
+
+    // Blurbs
+    const blurbs = {
+        fear: { text: "Fear drives humans to innovate or destroy.", image: "./assets/images/fear.png" },
+        mind: { text: "The mind is the ultimate frontier.", image: "./assets/images/head.png" },
+        overpopulation: { text: "Over Population challenges resources.", image: "./assets/images/overpopulation.png" },
+        superhuman: { text: "Super Human capabilities extend beyond biology.", image: "./assets/images/arm.png" },
+        economy: { text: "The economy evolves alongside automation.", image: "./assets/images/economy.png" },
+        utopia: { text: "Utopia represents the ultimate vision.", image: "./assets/images/man.png" },
+        war: { text: "War shifts into cyber realms.", image: "./assets/images/war.png" },
+        simuology: { text: "Simuology studies the simulated realities.", image: "./assets/images/simuology.png" },
+        simulation: { text: "Simulation experiments model societies.", image: "./assets/images/simulation.png" }
+    };
+
+    const wordElements = document.querySelectorAll(".word");
+    const blurbText = document.getElementById("blurb-text");
+    const blurbImage = document.getElementById("blurb-image");
+
+    // Typing animation with cancellation
+    let typingInterval;
+    function typeText(text, element) {
+        if (typingInterval) clearInterval(typingInterval);
+        element.textContent = "";
+        let i = 0;
+        typingInterval = setInterval(() => {
+            element.textContent += text.charAt(i);
+            i++;
+            if (i >= text.length) {
+                clearInterval(typingInterval);
+                typingInterval = null;
+            }
+        }, 30);
+    }
+
+    // Scatter words randomly
+    const container = document.querySelector(".word-soup");
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    wordElements.forEach(word => {
+        const x = Math.random() * (containerWidth - 100);
+        const y = Math.random() * (containerHeight - 50);
+        word.style.left = `${x}px`;
+        word.style.top = `${y}px`;
+    });
+
+    // Word click events
+    wordElements.forEach(word => {
+        word.addEventListener("click", () => {
+            const key = word.dataset.key;
+            const blurb = blurbs[key];
+            if (!blurb) return;
+
+            blurbImage.src = blurb.image;
+            typeText(blurb.text, blurbText);
+
+            // Log the click using logger.js
+            logClick(`Word clicked: ${key}`);
+        });
+    });
+</script>
+
+</body>
 </html>
