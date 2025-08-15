@@ -46,7 +46,7 @@ export function createNeuralNetwork(container, options = {}) {
 
     const objLoader = new OBJLoader();
     objLoader.load(
-        options.modelPath || 'assets/models/brain-parts-big_07.obj',
+        options.modelPath || 'assets/models/brain-parts-big_07.OBJ',
         (brainMesh) => {
             brainMesh.scale.set(0.5, 0.5, 0.5);
             brainMesh.position.set(0, 0, 0);
