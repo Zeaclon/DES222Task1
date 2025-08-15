@@ -1,0 +1,100 @@
+/* Make essay page match landing page grid */
+.main-container {
+    max-width: 72em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "ban ban ban ban"
+        "ws  ws  ws  ws ";
+    column-gap: 1em;
+    row-gap: 1em;
+}
+
+/* Tablet */
+@media (min-width: 50em) {
+    .main-container {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-areas:
+            "ban ban ban ban ban ban ban ban"
+            "ws  ws  ws  ws  ws  ws  ws  ws ";
+    }
+}
+
+/* Desktop */
+@media (min-width: 75em) {
+    .main-container {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-areas:
+            "ban ban ban ban ban ban ban ban ban ban ban ban"
+            "ws  ws  ws  ws  ws  ws  ws  ws  ws  ws  ws  ws ";
+    }
+}
+
+/* Banner area */
+#banner { grid-area: ban; }
+
+/* Word soup section */
+.word-soup-section {
+    grid-area: ws;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0;
+    width: 100%;
+}
+
+.word-soup {
+    position: relative;
+    width: 100%;
+    min-height: 20em;
+}
+
+/* Individual words scattered dynamically */
+.word {
+    position: absolute;
+    font-size: 2em;
+    cursor: pointer;
+    color: #98F9FF;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.word:hover {
+    transform: scale(1.3) rotate(-5deg);
+    color: var(--electric-purple);
+}
+
+/* Blurb container horizontal layout */
+.blurb-container {
+    margin-top: 3em;
+    width: 80%;
+    max-width: 50em;
+    display: flex;
+    align-items: flex-start;
+    gap: 2em;
+    background-image: linear-gradient(var(--black) 2%, var(--light-blue));
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.blurb-container img {
+    max-width: 25em;   /* image won't exceed this width */
+    max-height: 25em;  /* image won't exceed this height */
+    width: auto;       /* scale width proportionally */
+    height: auto;      /* scale height proportionally */
+    border-radius: 1em;
+    flex-shrink: 0;
+}
+
+.blurb-text-wrapper {
+    flex: 1;          /* text fills remaining space */
+}
+
+.blurb-container p {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #98F9FF;
+    min-height: 4em;
+    white-space: pre-wrap;
+    margin: 0;
+}
