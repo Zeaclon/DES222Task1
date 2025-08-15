@@ -7,6 +7,7 @@ function getBridgeColor(type) {
         case 'pageChange': return 0x00ff00; // green
         case 'click': return 0xff00ff; // purple
         case 'error': return 0xff0000; // red
+        case 'custom': return 0xffffff; //white
         default: return 0xffff00;           // yellow for anything else
     }
 }

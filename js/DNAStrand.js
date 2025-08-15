@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js';
 import { buildDNA } from './dna.js';
-import { getLogs } from './logger.js';  // <- import the logger
+import { getLogs, logEvent } from './logger.js';
 
 const container = document.getElementById('dna3d-container');
 const logInfo = document.getElementById('logInfo'); // may be null
@@ -66,3 +66,51 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
+
+
+// --- Buttons ---
+const addBridgeBtn = document.getElementById('addBridgeBtn');
+const removeBridgeBtn = document.getElementById('removeBridgeBtn');
+
+// Helper to add a custom bridge
+addBridgeBtn.addEventListener('click', () => {
+    const h1Children = dnaHelix1.children;
+    const h2Children = dnaHelix2.children;
+    if (h1Children.length && h2Children.length) {
+        const idx = Math.floor(Math.random() * h1Children.length);
+        const start = h1Children[idx].position;
+        const end = h2Children[idx].position;
+
+        const customLog = {
+            time: new Date().toISOString(),
+            type: 'custom',
+            message: 'User hacked this DNA bridge!'
+        };
+
+        // --- Persist to localStorage ---
+        logEvent(customLog.type, customLog.message);
+
+        // --- Add visually ---
+        const bridge = createBridgeBetweenPoints(
+            start,
+            end,
+            0.1,
+            0xffff00,  // yellow for custom
+            customLog
+        );
+        basePairsBridges.add(bridge);
+    }
+});
+
+// Remove last bridge
+removeBridgeBtn.addEventListener('click', () => {
+    const logs = getLogs();
+    if (basePairsBridges.children.length > 0 && logs.length > 0) {
+        const lastBridge = basePairsBridges.children[basePairsBridges.children.length - 1];
+        basePairsBridges.remove(lastBridge);
+
+        // Remove last log from localStorage
+        logs.pop();
+        localStorage.setItem('siteLogs', JSON.stringify(logs));
+    }
+});
