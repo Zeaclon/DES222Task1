@@ -46,7 +46,7 @@ export function createNeuralNetwork(container, options = {}) {
 
     const objLoader = new OBJLoader();
     objLoader.load(
-        options.modelPath || 'assets/models/brain-parts-big_07.OBJ',
+        options.modelPath || 'assets/models/brain-parts-big_07.obj',
         (brainMesh) => {
             brainMesh.scale.set(0.5, 0.5, 0.5);
             brainMesh.position.set(0, 0, 0);
@@ -146,7 +146,7 @@ export function createNeuralNetwork(container, options = {}) {
             // Animate
             function animate() {
                 requestAnimationFrame(animate);
-                brainGroup.rotation.y += 0.002;
+                brainGroup.rotation.y += 0.001;
 
                 // Pulse lights
                 const time = performance.now();
