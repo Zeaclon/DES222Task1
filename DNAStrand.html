@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DNA Log Translator</title>
+    <link rel="stylesheet" href="css/DNAStrand-page.css">
 </head>
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+        "three/examples/jsm/controls/OrbitControls.js": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js"
+      }
+    }
+</script>
 <body>
-
+<div id="dna3d-container"></div>
+<div id="logInfo">Hover over a bridge to see log info</div>
+<script type="module" src="js/DNAStrand.js"></script>
 </body>
 </html>

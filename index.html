@@ -48,7 +48,45 @@
 
 </div>
 
-<script type="module" src="js/DNAStrand.js"></script>
+<script type="module" src="js/displayDNAStrand.js"></script>
+<script type="module">
+    import { logInit, logClick, logPageChange } from './js/logger.js';
+    import { createNeuralNetwork } from './js/NNCBrain.js';
+
+    // Log that this page has initialized
+    logInit();
+    logPageChange(window.location.pathname);
+
+    // Initialize neural network visualization
+    const container = document.getElementById('nnc-container');
+    createNeuralNetwork(container);
+
+    // Select the cards
+    const dnaCard = document.getElementById('linkCard1');
+    const brainCard = document.getElementById('linkCard2');
+    const essayCard = document.getElementById('linkCard3');
+
+    // Add click listeners and log clicks
+    dnaCard.addEventListener('click', () => {
+        logClick('DNA card');
+        window.location.href = 'DNAStrand.html';
+    });
+
+    brainCard.addEventListener('click', () => {
+        logClick('NNC card');
+        window.location.href = 'NeuralNetworkConnections.html';
+    });
+
+    essayCard.addEventListener('click', () => {
+        logClick('Essay card');
+        window.location.href = 'FutureReflections.html';
+    });
+
+    // Change cursor on hover to indicate it's clickable
+    [dnaCard, brainCard, essayCard].forEach(card => {
+        card.style.cursor = 'pointer';
+    });
+</script>
 <script type="module">
     import { createNeuralNetwork } from './js/NNCBrain.js';
 

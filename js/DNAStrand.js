@@ -1,122 +1,68 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js';
+import { buildDNA } from './dna.js';
+import { getLogs } from './logger.js';  // <- import the logger
 
 const container = document.getElementById('dna3d-container');
+const logInfo = document.getElementById('logInfo'); // may be null
 
-// Scene setup
+// --- Scene setup ---
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // aspect=1 as placeholder
-camera.position.z = 10;
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.z = 15;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setClearColor(0x000000);  // optional background color
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000);
 container.appendChild(renderer.domElement);
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.enabled = false;
+controls.enablePan = true;
+controls.enableZoom = true;
 
-// Resize handler
-function onWindowResize() {
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-
-    if (width === 0 || height === 0) return;
-
-    camera.aspect = width / height;
+// Resize
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
-    renderer.setSize(width, height);
-}
-
-// Call resize initially and on window resize
-window.addEventListener('resize', onWindowResize);
-window.addEventListener('load', () => {
-    onWindowResize();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// DNA parameters
-const numBasePairs = 100;
-const radius = 2;
-const height = 10;
+// --- Build DNA from persisted logs ---
+const logs = getLogs(); // <- get logs from localStorage
+const { dnaHelix1, dnaHelix2, basePairsBridges } = buildDNA(logs);
+scene.add(dnaHelix1, dnaHelix2, basePairsBridges);
 
-// Materials & geometry
-const basePairGeometry = new THREE.SphereGeometry(0.1, 16, 16);
-const basePairMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+// --- Raycaster ---
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
-// Groups for the helices and bridges
-const dnaHelix1 = new THREE.Group();
-const dnaHelix2 = new THREE.Group();
-const basePairsBridges = new THREE.Group();
+function onMouseMove(event) {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
-// Create helix spheres
-for (let i = 0; i < numBasePairs; i++) {
-    const angle = (i / numBasePairs) * Math.PI * 2;
-    const y = (i / numBasePairs) * height - height / 2;
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(basePairsBridges.children);
 
-    const x1 = radius * Math.cos(angle);
-    const z1 = radius * Math.sin(angle);
-    const basePair1 = new THREE.Mesh(basePairGeometry, basePairMaterial);
-    basePair1.position.set(x1, y, z1);
-    dnaHelix1.add(basePair1);
-
-    const x2 = radius * Math.cos(angle + Math.PI);
-    const z2 = radius * Math.sin(angle + Math.PI);
-    const basePair2 = new THREE.Mesh(basePairGeometry, basePairMaterial);
-    basePair2.position.set(x2, y, z2);
-    dnaHelix2.add(basePair2);
+    if (logInfo) { // only update if element exists
+        if (intersects.length > 0) {
+            const log = intersects[0].object.userData.log;
+            logInfo.innerHTML = `Time: ${log.time} | Type: ${log.type} | Message: ${log.message}`;
+        } else {
+            logInfo.innerHTML = 'Hover over a bridge to see log info';
+        }
+    }
 }
 
-// Helper to create cylinder bridges
-function createBridgeBetweenPoints(start, end, radius, color) {
-    const direction = new THREE.Vector3().subVectors(end, start);
-    const length = direction.length();
+window.addEventListener('mousemove', onMouseMove);
 
-    const geometry = new THREE.CylinderGeometry(radius, radius, length, 8);
-    const material = new THREE.MeshBasicMaterial({ color: color });
-    const cylinder = new THREE.Mesh(geometry, material);
-
-    const midpoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
-    cylinder.position.copy(midpoint);
-
-    cylinder.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.clone().normalize());
-
-    return cylinder;
-}
-
-// Create bridges
-for (let i = 0; i < numBasePairs; i++) {
-    const angle = (i / numBasePairs) * Math.PI * 2;
-    const y = (i / numBasePairs) * height - height / 2;
-
-    const start = new THREE.Vector3(radius * Math.cos(angle), y, radius * Math.sin(angle));
-    const end = new THREE.Vector3(radius * Math.cos(angle + Math.PI), y, radius * Math.sin(angle + Math.PI));
-
-    const bridge = createBridgeBetweenPoints(start, end, 0.05, 0x0000ff);
-    basePairsBridges.add(bridge);
-}
-
-// Add everything to scene
-scene.add(dnaHelix1);
-scene.add(dnaHelix2);
-scene.add(basePairsBridges);
-
-// Animation loop
+// --- Animate ---
 function animate() {
     requestAnimationFrame(animate);
-
-    dnaHelix1.rotation.y += 0.001;
-    dnaHelix2.rotation.y += 0.001;
-    basePairsBridges.rotation.y += 0.001;
-
+    dnaHelix1.rotation.y += 0.002;
+    dnaHelix2.rotation.y += 0.002;
+    basePairsBridges.rotation.y += 0.002;
     controls.update();
     renderer.render(scene, camera);
 }
-
 animate();
-
-// Change color on click
-document.addEventListener('click', () => {
-    const newColor = new THREE.Color(Math.random(), Math.random(), Math.random());
-    basePairMaterial.color.set(newColor);
-});
