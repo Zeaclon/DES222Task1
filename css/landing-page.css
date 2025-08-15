@@ -1,0 +1,46 @@
+/* Landing page-specific styles */
+
+/* Assign grid areas for this page */
+#banner { grid-area: ban; }
+#textCard { grid-area: txc; }
+
+.main-container {
+    max-width: 72em;      /* max width (like you have now) */
+    width: 100%;          /* lets it shrink and grow */
+    font-family: 'Orbitron', system-ui, sans-serif;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "ban ban ban ban"
+        "txc txc txc txc"
+        "lc1 lc1 lc1 lc1"
+        "lc2 lc2 lc2 lc2"
+        "lc3 lc3 lc3 lc3";
+    column-gap: 1em;
+    row-gap: 1em;
+    color: var(--warm-grey);  /* easier to see text */
+}
+
+/* Tablet */
+@media (min-width: 50em) {
+    .main-container {
+        grid-template-columns: repeat(8, 1fr); /* 8 equal columns */
+        grid-template-areas:
+            "ban ban ban ban ban ban ban ban"
+            "txc txc txc txc txc txc txc txc"
+            "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2"
+            ".   .   lc3 lc3 lc3 lc3 .   .";
+    }
+}
+
+/* Desktop */
+@media (min-width: 75em) {
+    .main-container {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-areas:
+            "ban ban ban ban ban ban ban ban ban ban ban ban"
+            "txc txc txc txc txc txc txc txc txc txc txc txc"
+            "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2 lc3 lc3 lc3 lc3";
+    }
+}
+

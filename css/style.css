@@ -1,13 +1,9 @@
-/*
-Color pallete. This section defines variables for the color pallete,
-so that we can refer to particular colors by name instead of hexadecimal values.
-This is applied to the 'root' psuedo-element, which just means that these color
-variables are available to be used anywhere in our html document
-*/
+/* Global Styles for the whole site */
+
+/* Color palette */
 :root {
     --white: #FFFFFF;
     --black: #000000;
-    /* add in other color variables for color palette */
     --dark-blue: #006D77;
     --light-blue: #00B4D8;
     --electric-purple: #9D4EDD;
@@ -16,6 +12,7 @@ variables are available to be used anywhere in our html document
     --orange: #FF8C42;
 }
 
+/* Base typography & box sizing */
 html, body {
     font-family: 'Orbitron', system-ui, sans-serif;
     overflow-x: hidden;
@@ -25,7 +22,7 @@ html, body {
     box-sizing: border-box;
 }
 
-/* The body of the document has a white background and is set up as a vertical flexbox. */
+/* Body layout */
 body {
     background-color: var(--black);
     display: flex;
@@ -33,156 +30,112 @@ body {
     align-items: center;
 }
 
-/* Defines the main container size, we are limiting to 72em max */
+/* Main container grid */
 .main-container {
-    max-width: 72em;      /* max width (like you have now) */
-    width: 100%;          /* lets it shrink and grow */
-    font-family: 'Orbitron', system-ui, sans-serif;
+    max-width: 72em;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-areas:
-        "ban ban ban ban"
-        "txc txc txc txc"
-        "lc1 lc1 lc1 lc1"
-        "lc2 lc2 lc2 lc2"
-        "lc3 lc3 lc3 lc3";
     column-gap: 1em;
     row-gap: 1em;
-    color: var(--warm-grey);  /* easier to see text */
+    color: var(--warm-grey);
 }
 
-/* Here we define the aspects of style of our elements other than their grid layout */
+/* Banner */
 .banner {
     margin-top: 1em;
     border-radius: 2em 2em 0 0;
     background: var(--light-blue);
-    display: flex; /* make it a flex container */
-    flex-direction: column; /* stack title and subtitle vertically */
-    align-items: center; /* center horizontally */
-    justify-content: center; /* center vertically */
-    text-align: center; /* center text inside each element */
-    padding: 1em; /* give breathing room */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1em;
 }
 
 .banner-title {
-    font-weight: 400;
-    font-size: 2.5em;
-    font-family: 'Orbitron', system-ui, sans-serif;
-    margin-bottom: 0.2em; /* tiny gap between title and subtitle */
-    margin-top: 0.2em;
     font-weight: bolder;
-
+    font-size: 2.5em;
+    margin: 0.2em 0;
 }
 
 .banner-subtitle {
     font-size: 1.5em;
-    font-family: 'Orbitron', system-ui, sans-serif;
     font-weight: 300;
-    margin-top: 0; /* remove default paragraph spacing */
-    color: #98F9FF;
-
-}
-
-.textCard {
-    background-image: linear-gradient(
-            to bottom,
-            var(--light-blue) 15%,
-            var(--black) 67%
-    );
-    font-size: 1.5em;
-    padding: 1em; /* so text isn’t flush against the edge */
-}
-
-.textCard-bodyText{
-    margin: 0;
+    margin-top: 0;
     color: #98F9FF;
 }
 
+/* Shared card styling */
 .link-card {
-    width: 100%;
-    min-width: 250px; /* optional, to avoid collapse */
-    min-height: 30em; /* to include blurb + 3d */
+    width: 100%;        /* fill its grid cell */
+    min-height: 30em;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-image: linear-gradient(var(--black) 75%,var(--light-blue));
+    background-image: linear-gradient(var(--black) 75%, var(--light-blue));
     border-radius: 1em;
 }
 
-/* this is the equivalent of setting the image rectangle to "Fill Container" in Figma */
 .link-card-image {
     width: 100%;
 }
 
 .link-card-blurb {
-    /* TODO: style the blurb with padding */
     font-size: 1em;
     font-weight: lighter;
 }
 
-/* now we create names for the grid areas for specific elements */
-#banner {
-    /* TODO: give the grid-area a name */
-    grid-area: ban;
+/* Text card */
+.textCard {
+    background-image: linear-gradient(to bottom, var(--light-blue) 15%, var(--black) 67%);
+    font-size: 1.5em;
+    padding: 1em;
 }
 
-#linkCard1 {
-    /* TODO: give the grid-area a name */
-    grid-area: lc1;
+
+.textCard-bodyText {
+    margin: 0;
+    color: #98F9FF;
 }
 
-#linkCard2 {
-    /* TODO: give the grid-area a name */
-    grid-area: lc2;
-}
-
-#linkCard3 {
-    /* TODO: give the grid-area a name */
-    grid-area: lc3;
-}
-
-#textCard{
-    grid-area: txc;
-}
-
-#dna3d-container {
-    width: 100%;
-    height: 22.5em;  /* fixed height */
-    overflow: hidden;
-}
-
+/* Containers for 3D objects */
+#dna3d-container,
 #nnc-container {
     width: 100%;
-    height: 22.5em;  /* fixed height */
+    height: 22.5em;
     overflow: hidden;
 }
 
-/*
-Responsive Layout breakpoints. We start 'mobile-first' i.e. we define how the layout should look
-for the smallest screen sizes. In this case we want a single column that spans the main container.
-Because this CSS definition comes first, it will apply by default. Then we override it below with
-media queries for progressively bigger screen widths
-*/
+/* Grid area assignments */
+#linkCard1 { grid-area: lc1; }
+#linkCard2 { grid-area: lc2; }
+#linkCard3 { grid-area: lc3; }
 
+
+/* Mobile-first horizontal gradient for textCard */
+@media (max-width: 49.99em) {
+    .banner {
+        background-image: linear-gradient(to right, var(--light-blue) 0%, var(--black) 67%);
+    }
+    .textCard {
+        background-image: linear-gradient(to right, var(--light-blue) 0%, var(--black) 67%);
+    }
+    .link-card {
+        background-image: linear-gradient(to right, var(--light-blue) 0%, var(--black) 67%);
+    }
+}
+
+/* Responsive breakpoints */
 @media (min-width: 50em) {
     .main-container {
         grid-template-columns: repeat(8, 1fr);
-        grid-template-areas:
-            "ban ban ban ban ban ban ban ban"
-            "txc txc txc txc txc txc txc txc"
-            "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2"
-            ".   .   lc3 lc3 lc3 lc3 .   .";
     }
 }
 
 @media (min-width: 75em) {
     .main-container {
-        /* TODO: setup the grid-template for desktop layout */
-        /* Desktop-first layout */
         grid-template-columns: repeat(12, 1fr);
-        grid-template-areas:
-        "ban ban ban ban ban ban ban ban ban ban ban ban"
-        "txc txc txc txc txc txc txc txc txc txc txc txc"
-        "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2 lc3 lc3 lc3 lc3";
     }
 }
