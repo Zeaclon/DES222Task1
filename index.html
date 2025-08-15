@@ -51,7 +51,7 @@
 <script type="module" src="js/displayDNAStrand.js"></script>
 <script type="module">
     import { logInit, logClick, logPageChange } from './js/logger.js';
-    import { createNeuralNetwork } from './js/NNCBrain.js';
+    import { createNeuralNetwork } from './js/displayNNCBrain.js';
 
     // Log that this page has initialized
     logInit();
@@ -88,7 +88,7 @@
     });
 </script>
 <script type="module">
-    import { createNeuralNetwork } from './js/NNCBrain.js';
+    import { createNeuralNetwork } from './js/displayNNCBrain.js';
 
     const container = document.getElementById('nnc-container');
     createNeuralNetwork(container);

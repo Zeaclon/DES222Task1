@@ -2,9 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Brain</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/brain-page.css">
+
 </head>
+
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+        "three/examples/jsm/controls/OrbitControls.js": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js"
+      }
+    }
+</script>
+
 <body>
+<div class="main-container">
+    <section id="brainSection" class="brain-section">
+        <div id="brain3d-container" class="brain-3d-container"></div>
+        <div id="telemetryInfo" class="telemetry-info">
+            Hover over a neuron to see activity
+        </div>
+    </section>
+</div>
+
+<script type="module">
+    import { createNeuralNetwork } from './js/NNCBrain.js';
+    import { logInit, logClick, logPageChange } from './js/logger.js';
+
+    // Log page init
+    logInit();
+    logPageChange(window.location.pathname);
+
+    const container = document.getElementById('brain3d-container');
+    createNeuralNetwork(container);
+
+    // Optionally log clicks on the brain section
+    const brainSection = document.getElementById('brainSection');
+    brainSection.addEventListener('click', () => {
+        logClick('Brain page container');
+    });
+</script>
 
 </body>
 </html>
