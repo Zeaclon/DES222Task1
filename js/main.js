@@ -1,14 +1,42 @@
 const blurbs = {
-    fear: { text: "Fear drives humans to innovate or destroy.", image: "./assets/images/fear.png" },
-    mind: { text: "The mind is the ultimate frontier.", image: "./assets/images/head.png" }, // skull with tech implants
-    overpopulation: { text: "Over Population challenges resources.", image: "./assets/images/overpopulation.png" },
-    superhuman: { text: "Super Human capabilities extend beyond biology.", image: "./assets/images/arm.png" }, // an arm with technology and muscle image
-    economy: { text: "The economy evolves alongside automation.", image: "./assets/images/economy.png" },
-    utopia: { text: "Utopia represents the ultimate vision.", image: "./assets/images/man.png" }, //image is of a peruvian man with tech augments
-    war: { text: "War shifts into cyber realms.", image: "./assets/images/war.png" },
-    simuology: { text: "Simuology studies the simulated realities.", image: "./assets/images/simuology.png" },
-    simulation: { text: "Simulation experiments model societies.", image: "./assets/images/simulation.png" }
+    fear: {
+        text: "Fear is no longer just instinct—it shapes the ethics of augmentation and AI. Humans hesitate, resist, or innovate in response to the unknown. Will we embrace the risks of cybernetic enhancements, or will fear stall progress, creating a world split between the enhanced and the unaltered?",
+        image: "./assets/images/fear.png"
+    },
+    mind: {
+        text: "The human mind becomes malleable through AI integration, brain-computer interfaces, and cognitive augmentation. Knowledge accelerates beyond individual capacity, but with it comes vulnerability: whose values guide these enhanced decisions? The mind, once private, now flows into collective intelligence networks, blurring selfhood and societal boundaries.",
+        image: "./assets/images/head.png"
+    },
+    overpopulation: {
+        text: "Overpopulation stresses the resources of Earth, compelling humanity to innovate through technological efficiency, augmented workforces, and urban redesign. The augmented body becomes an adaptive solution—stronger, smarter, more resilient—while AI-managed ecosystems predict and redistribute scarcity. Humanity evolves physically and socially to survive our own expansion.",
+        image: "./assets/images/overpopulation.png"
+    },
+    superhuman: {
+        text: "Superhuman capabilities are no longer myth. Cybernetic limbs, neural enhancements, and genetic modification redefine what humans can achieve. Society faces new hierarchies of ability, access, and ethics. As some transcend biological limits, questions arise: is humanity defined by flesh, intellect, or the integration of technology into identity?",
+        image: "./assets/images/arm.png"
+    },
+    economy: {
+        text: "Automation, AI, and human augmentation transform economies, challenging traditional labor, value, and purpose. Augmented humans and intelligent machines coexist, raising questions of equity, access, and social responsibility. The economy is not just financial—it becomes a reflection of our technological maturity and the balance between human and machine potential.",
+        image: "./assets/images/economy.png"
+    },
+    utopia: {
+        text: "Utopia is imagined not as a static paradise but as a dynamic landscape of possibility, shaped by human augmentation, AI ethics, and interactive social structures. Technology allows collaboration, empathy, and creativity on unprecedented scales, but perfection is always contested—requiring reflection on power, access, and the futures we collectively design.",
+        image: "./assets/images/man.png"
+    },
+    war: {
+        text: "War evolves into a contest of minds, algorithms, and cybernetic skill. Augmented soldiers, AI strategists, and digital battlefields replace traditional frontlines. Humanity’s capacity for destruction expands, but so does the opportunity for strategic restraint, ethical frameworks, and the redesign of conflict itself in a world where bodies and machines merge.",
+        image: "./assets/images/war.png"
+    },
+    simuology: {
+        text: "Simuology allows humans to explore potential realities, interacting with alternate societal models, ethical dilemmas, and technological trajectories. By inhabiting simulations, we test futures without consequence, learning how augmentation, AI, and collective intelligence shape human culture. Reality itself becomes a spectrum of possibility, informed by the insights gained from virtual experimentation.",
+        image: "./assets/images/simuology.png"
+    },
+    simulation: {
+        text: "Simulation experiments model societies where augmented bodies and intelligent systems coexist. Through these virtual laboratories, we observe emergent behaviors, test social policies, and anticipate ethical quandaries. The boundaries of human experience extend into digital realms, revealing futures shaped as much by imagination as by technology and human decision-making.",
+        image: "./assets/images/simulation.png"
+    }
 };
+
 
 const wordElements = document.querySelectorAll(".word");
 const blurbText = document.getElementById("blurb-text");
