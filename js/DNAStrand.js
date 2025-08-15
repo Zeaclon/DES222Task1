@@ -9,11 +9,12 @@ const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // aspect=1 as pla
 camera.position.z = 10;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setClearColor(0x222222);  // optional background color
+renderer.setClearColor(0x000000);  // optional background color
 container.appendChild(renderer.domElement);
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.enabled = false;
 
 // Resize handler
 function onWindowResize() {

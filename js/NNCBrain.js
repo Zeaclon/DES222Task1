@@ -5,7 +5,7 @@ import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/j
 export function createNeuralNetwork(container) {
     // Scene setup
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x111111);
+    scene.background = new THREE.Color(0x000000);
 
     const camera = new THREE.PerspectiveCamera(
         75,
@@ -20,7 +20,7 @@ export function createNeuralNetwork(container) {
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
+    controls.enabled = false;
 
     // Add lights so materials can be seen
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);

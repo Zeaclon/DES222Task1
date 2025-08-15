@@ -16,9 +16,18 @@ variables are available to be used anywhere in our html document
     --orange: #FF8C42;
 }
 
+html, body {
+    font-family: 'Orbitron', system-ui, sans-serif;
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* The body of the document has a white background and is set up as a vertical flexbox. */
 body {
-    background-color: var(--white);
+    background-color: var(--black);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,43 +37,75 @@ body {
 .main-container {
     max-width: 72em;      /* max width (like you have now) */
     width: 100%;          /* lets it shrink and grow */
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Orbitron', system-ui, sans-serif;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
         "ban ban ban ban"
+        "txc txc txc txc"
         "lc1 lc1 lc1 lc1"
         "lc2 lc2 lc2 lc2"
         "lc3 lc3 lc3 lc3";
     column-gap: 1em;
-    row-gap: 1.5em;
+    row-gap: 1em;
     color: var(--warm-grey);  /* easier to see text */
 }
 
 /* Here we define the aspects of style of our elements other than their grid layout */
 .banner {
-    /* TODO: banner styling */
-    background-color: var(--dark-blue);
-    padding: 16px;
-    gap: 10px;
+    margin-top: 1em;
+    border-radius: 2em 2em 0 0;
+    background: var(--light-blue);
+    display: flex; /* make it a flex container */
+    flex-direction: column; /* stack title and subtitle vertically */
+    align-items: center; /* center horizontally */
+    justify-content: center; /* center vertically */
+    text-align: center; /* center text inside each element */
+    padding: 1em; /* give breathing room */
 }
 
 .banner-title {
-    /* TODO: banner main title font styling */
     font-weight: 400;
-    font-size: 3em;
+    font-size: 2.5em;
+    font-family: 'Orbitron', system-ui, sans-serif;
+    margin-bottom: 0.2em; /* tiny gap between title and subtitle */
+    margin-top: 0.2em;
+    font-weight: bolder;
+
 }
 
 .banner-subtitle {
-    /* TODO: banner subtitle font styling */
-    font-size: 2.25em;
+    font-size: 1.5em;
+    font-family: 'Orbitron', system-ui, sans-serif;
     font-weight: 300;
+    margin-top: 0; /* remove default paragraph spacing */
+    color: #98F9FF;
 
 }
 
+.textCard {
+    background-image: linear-gradient(
+            to bottom,
+            var(--light-blue) 15%,
+            var(--black) 67%
+    );
+    font-size: 1.5em;
+    padding: 1em; /* so text isn’t flush against the edge */
+}
+
+.textCard-bodyText{
+    margin: 0;
+    color: #98F9FF;
+}
+
 .link-card {
-    /* TODO: style the card as a column based flexbox with rounded corners */
-    background-color: var(--light-blue);
+    width: 100%;
+    min-width: 250px; /* optional, to avoid collapse */
+    min-height: 30em; /* to include blurb + 3d */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-image: linear-gradient(var(--black) 75%,var(--light-blue));
     border-radius: 1em;
 }
 
@@ -100,21 +141,21 @@ body {
     grid-area: lc3;
 }
 
-.link-card {
-    width: 100%;  /* make sure it fills its grid cell */
-    min-width: 250px; /* optional, to avoid collapse */
-    min-height: 320px; /* to include blurb + 3d */
-    display: flex;
-    flex-direction: column;
+#textCard{
+    grid-area: txc;
 }
 
 #dna3d-container {
     width: 100%;
-    height: 300px;  /* fixed height */
-    border-radius: 1em;
+    height: 22.5em;  /* fixed height */
     overflow: hidden;
 }
 
+#nnc-container {
+    width: 100%;
+    height: 22.5em;  /* fixed height */
+    overflow: hidden;
+}
 
 /*
 Responsive Layout breakpoints. We start 'mobile-first' i.e. we define how the layout should look
@@ -128,6 +169,7 @@ media queries for progressively bigger screen widths
         grid-template-columns: repeat(8, 1fr);
         grid-template-areas:
             "ban ban ban ban ban ban ban ban"
+            "txc txc txc txc txc txc txc txc"
             "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2"
             ".   .   lc3 lc3 lc3 lc3 .   .";
     }
@@ -140,6 +182,7 @@ media queries for progressively bigger screen widths
         grid-template-columns: repeat(12, 1fr);
         grid-template-areas:
         "ban ban ban ban ban ban ban ban ban ban ban ban"
+        "txc txc txc txc txc txc txc txc txc txc txc txc"
         "lc1 lc1 lc1 lc1 lc2 lc2 lc2 lc2 lc3 lc3 lc3 lc3";
     }
 }

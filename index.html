@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <script type="importmap">
@@ -18,17 +21,23 @@
 <div class="main-container">
 
     <section id="banner" class="banner">
-        <h1 class="banner-title">Welcome to My Site</h1>
-        <p class="banner-subtitle">My success is my mission</p>
+        <h1 class="banner-title">Beyond Human: The Augmented Future</h1>
+        <p class="banner-subtitle">Exploring the boundaries between body, technology and, identity</p>
+    </section>
+
+    <section id="textCard" class="textCard">
+        <p class="textCard-bodyText">This will contain a brief paragraph introducing the theme, referencing
+            trans-humanism, augmented bodies and possibly AI intergrations. <br> <br>
+            Could use the primary and highlight colors for headings and key phrases.</p>
     </section>
 
     <section id="linkCard1" class="link-card">
-        <div id="dna3d-container" style="width: 100%; height: 300px;"></div>
+        <div id="dna3d-container"></div>
         <p class="link-card-blurb">DNA strand</p>
     </section>
 
     <section id="linkCard2" class="link-card">
-        <div id="nnc-container" style="width: 100%; height: 400px;"></div>
+        <div id="nnc-container"></div>
         <p class="link-card-blurb">NNC</p>
     </section>
 
@@ -44,5 +53,30 @@
 
     const container = document.getElementById('nnc-container');
     createNeuralNetwork(container);
-</script></body>
+</script>
+<script>
+    // Select the cards
+    const dnaCard = document.getElementById('linkCard1');
+    const brainCard = document.getElementById('linkCard2');
+    const essayCard = document.getElementById('linkCard3');
+
+    // Add click listeners
+    dnaCard.addEventListener('click', () => {
+        window.location.href = 'DNAStrand.html';
+    });
+
+    brainCard.addEventListener('click', () => {
+        window.location.href = 'NeuralNetworkConnections.html';
+    });
+
+    essayCard.addEventListener('click', () => {
+        window.location.href = 'FutureReflections.html';
+    });
+
+    //Change cursor on hover to indicate it's clickable
+    [dnaCard, brainCard, essayCard].forEach(card => {
+        card.style.cursor = 'pointer';
+    });
+</script>
+</body>
 </html>
