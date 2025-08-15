@@ -1,6 +1,6 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js';
-import { buildDNA } from './dna.js';
+import { buildDNA, createBridgeBetweenPoints } from './dna.js';
 import { getLogs, logEvent } from './logger.js';
 
 const container = document.getElementById('dna3d-container');
